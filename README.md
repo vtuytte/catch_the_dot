@@ -37,13 +37,14 @@ Compete between your **left and right hands**. Each hand tries to catch more dot
 
 ---
 
-## 🛠Requirements
+## Requirements
 
-Make sure you have the required packages installed:
+Made using mediapipe version 0.10.21.
 
 ```bash
-pip install opencv-python mediapipe
+pip install "mediapipe>=0.10.21"
 ```
+
 
 ---
 
