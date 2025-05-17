@@ -3,6 +3,21 @@ import cv2
 import numpy as np
 
 def run_singleplayer(VIDEOSIZE = (1920, 1080), WINDOWSIZE = (1920, 1080), WINDOWNAME = 'Dotgame', PADDING = 200):
+    """
+    Runs the singleplayer mode of the "Catch the Dot" game using webcam input.
+    This function initializes the webcam, hand index finger detector, and game window.
+    The player must "pop" a red dot by moving their index finger (detected via webcam)
+    close to the dot's position on the screen. Each time the dot is popped, it moves to a new random location.
+    The number of dots popped is displayed in real-time.
+    Args:
+        VIDEOSIZE (tuple, optional): The resolution (width, height) for the webcam capture. Defaults to (1920, 1080).
+        WINDOWSIZE (tuple, optional): The size (width, height) of the game window. Defaults to (1920, 1080).
+        WINDOWNAME (str, optional): The name of the game window. Defaults to 'Dotgame'.
+        PADDING (int, optional): The minimum distance from the window edge for placing the red dot. Defaults to 200.
+    Notes:
+        - Press 'q' or close the window to exit the game.
+    """
+
     # Initialize the webcam
     cap = cv2.VideoCapture(0)
     cap.set(3, VIDEOSIZE[0])
@@ -77,6 +92,23 @@ def run_singleplayer(VIDEOSIZE = (1920, 1080), WINDOWSIZE = (1920, 1080), WINDOW
     cv2.destroyAllWindows()
 
 def run_multiplayer(VIDEOSIZE = (1920, 1080), WINDOWSIZE = (1920, 1080), WINDOWNAME = 'Dotgame', PADDING = 200):
+    """
+    Runs the multiplayer mode of the "Catch the Dot" game using webcam input.
+    This function initializes the webcam, hand index finger detector, and game window.
+    Two players (left and right hand) compete to "pop" a red dot by moving their index finger
+    (detected via webcam) close to the dot's position on the screen. Each time the dot is popped,
+    it moves to a new random location. The number of dots popped by each player is tracked and displayed
+    in real-time.
+    Args:
+        VIDEOSIZE (tuple, optional): The resolution (width, height) for the webcam capture. Defaults to (1920, 1080).
+        WINDOWSIZE (tuple, optional): The size (width, height) of the game window. Defaults to (1920, 1080).
+        WINDOWNAME (str, optional): The name of the game window. Defaults to 'Dotgame'.
+        PADDING (int, optional): The minimum distance from the window edge for placing the red dot. Defaults to 200.
+    Notes:
+        - The left hand is represented in blue, and the right hand in green.
+        - The number of dots popped by each player is shown in the top left corner.
+        - Press 'q' or close the window to exit the game.
+    """
     # Initialize the webcam
     cap = cv2.VideoCapture(0)
     cap.set(3, VIDEOSIZE[0])
