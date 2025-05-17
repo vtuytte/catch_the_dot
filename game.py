@@ -121,9 +121,9 @@ def run_multiplayer(VIDEOSIZE = (1920, 1080), WINDOWSIZE = (1920, 1080), WINDOWN
     # Initialize the index detector
     detector = index_detector(model_path='hand_landmarker.task',
                                 num_hands=2,
-                                min_det_conf=0.2,
-                                min_hand_conf=0.2,
-                                min_track_conf=0.2)
+                                min_det_conf=0.3,
+                                min_hand_conf=0.3,
+                                min_track_conf=0.3)
 
     # Initialize the red dot
     dot = red_dot(pos=(VIDEOSIZE[0] // 2, VIDEOSIZE[1] // 2), size=50)
