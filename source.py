@@ -42,14 +42,17 @@ class index_detector:
             # Check if any hands were detected
             if not self.result.hand_world_landmarks:
                 return None
+        
             hand_landmarks = self.result.hand_landmarks[0] # We only care about the first hand
             index_finger = hand_landmarks[8] # We want the 8th position: https://ai.google.dev/edge/mediapipe/solutions/vision/hand_landmarker#models
+
             return np.array([index_finger.x, index_finger.y])
+        
         except AttributeError as e:
             return None
 
-    def get_index_finger_pos_double(self):
-        # Return the position of the index finger in the image for double player
+    def get_index_finger_pos_multi(self):
+        # Return the position of the index finger in the image for multiple players
 
         # Sometimes the model has never seen a hand in that case calling results.hand_world_landmarks
         # results in an attribute error so we catch it and return None
@@ -57,9 +60,16 @@ class index_detector:
             # Check if any hands were detected
             if not self.result.hand_world_landmarks:
                 return None
-            hand_landmarks = self.result.hand_landmarks[0] # We only care about the first hand
-            index_finger = hand_landmarks[8] # We want the 8th position: https://ai.google.dev/edge/mediapipe/solutions/vision/hand_landmarker#models
-            return np.array([index_finger.x, index_finger.y])
+
+            # Loop over all detected hands and save position and handedness
+            output = list()
+            hand_landmarks = self.result.hand_landmarks
+            for i in range(len(hand_landmarks)):
+                index_finger = hand_landmarks[i][8] # We want the 8th position: https://ai.google.dev/edge/mediapipe/solutions/vision/hand_landmarker#models
+                left_hand = self.result.handedness[i][0].index # 0 for left hand, 1 for right hand
+                output.append([index_finger.x, index_finger.y, left_hand])
+            return np.array(output)
+
         except AttributeError as e:
             return None
 
